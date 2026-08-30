@@ -1,4 +1,4 @@
-const CACHE = 'aflift-v26';
+const CACHE = 'aflift-v27';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(self.skipWaiting());
@@ -23,9 +23,13 @@ self.addEventListener('fetch', (event) => {
   const fresh =
     url.pathname.endsWith('/version.json') ||
     url.pathname.endsWith('/sw.js') ||
+    url.pathname.endsWith('/check.js') ||
     url.pathname.endsWith('/index.html') ||
     url.pathname.endsWith('/liftlog/') ||
-    url.pathname.endsWith('/liftlog');
+    url.pathname.endsWith('/liftlog') ||
+    url.pathname.endsWith('.js') ||
+    url.pathname.endsWith('.css') ||
+    url.pathname.endsWith('.json');
 
   event.respondWith(
     fetch(req, { cache: 'no-store' })
