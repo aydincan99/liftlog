@@ -1,4 +1,4 @@
-const CACHE = 'aflift-v27';
+const CACHE = 'aflift-v28';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(self.skipWaiting());
