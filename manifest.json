@@ -1,20 +1,26 @@
 {
-  "name": "Liftlog",
-  "short_name": "Liftlog",
-  "description": "Antrenman, öğün, koç",
+  "name": "AF Lift",
+  "short_name": "AF Lift",
+  "description": "Aydın Fitness — antrenman, öğün, koç",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#07070A",
-  "theme_color": "#07070A",
+  "background_color": "#041028",
+  "theme_color": "#041028",
   "lang": "tr",
   "icons": [
     {
       "src": "icon.png",
-      "sizes": "192x192",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }

@@ -1,4 +1,4 @@
-const CACHE = 'liftlog-v1';
+const CACHE = 'aflift-v1';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(self.skipWaiting());
