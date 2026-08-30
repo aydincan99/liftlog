@@ -2,14 +2,22 @@
   "name": "AF Lift",
   "short_name": "AF Lift",
   "description": "Aydın Fitness — antrenman, öğün, koç",
+  "id": "/liftlog/",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#041028",
-  "theme_color": "#041028",
+  "background_color": "#07080C",
+  "theme_color": "#07080C",
   "lang": "tr",
+  "categories": ["health", "fitness", "lifestyle"],
   "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "icon.png",
       "sizes": "512x512",
