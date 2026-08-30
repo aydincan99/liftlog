@@ -1,4 +1,4 @@
-const CACHE = 'aflift-v23';
+const CACHE = 'aflift-v24';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(self.skipWaiting());
@@ -20,7 +20,7 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return;
   if (url.searchParams.has('key') || url.searchParams.has('token')) return;
   event.respondWith(
-    fetch(req)
+    fetch(req, { cache: 'no-store' })
       .then((res) => {
         if (res.ok) {
           const copy = res.clone();
