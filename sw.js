@@ -1,4 +1,4 @@
-const CACHE = 'aflift-v24';
+const CACHE = 'aflift-v25';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(self.skipWaiting());
@@ -19,10 +19,18 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
   if (url.searchParams.has('key') || url.searchParams.has('token')) return;
+
+  const fresh =
+    url.pathname.endsWith('/version.json') ||
+    url.pathname.endsWith('/sw.js') ||
+    url.pathname.endsWith('/index.html') ||
+    url.pathname.endsWith('/liftlog/') ||
+    url.pathname.endsWith('/liftlog');
+
   event.respondWith(
     fetch(req, { cache: 'no-store' })
       .then((res) => {
-        if (res.ok) {
+        if (res.ok && !fresh) {
           const copy = res.clone();
           caches.open(CACHE).then((cache) => cache.put(req, copy)).catch(() => {});
         }
