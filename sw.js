@@ -1,4 +1,4 @@
-const CACHE = 'aflift-v29';
+const CACHE = 'aflift-v30';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(self.skipWaiting());
@@ -22,6 +22,7 @@ self.addEventListener('fetch', (event) => {
 
   const fresh =
     url.pathname.endsWith('/version.json') ||
+    url.pathname.endsWith('/rev.json') ||
     url.pathname.endsWith('/sw.js') ||
     url.pathname.endsWith('/check.js') ||
     url.pathname.endsWith('/index.html') ||
