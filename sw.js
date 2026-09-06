@@ -1,4 +1,4 @@
-const CACHE = 'aflift-v63';
+const CACHE = 'aflift-v64';
 
 const PRECACHE = ['./', './index.html', './app.js', './boot.js', './manifest.json', './icon.png'];
 
