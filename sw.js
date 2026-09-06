@@ -1,7 +1,14 @@
-const CACHE = 'aflift-v52';
+const CACHE = 'aflift-v53';
+
+const PRECACHE = ['./', './index.html', './app.js', './boot.js', './manifest.json', './icon.png'];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(self.skipWaiting());
+  event.waitUntil(
+    caches
+      .open(CACHE)
+      .then((cache) => Promise.all(PRECACHE.map((u) => cache.add(u).catch(() => {}))))
+      .then(() => self.skipWaiting()),
+  );
 });
 
 self.addEventListener('activate', (event) => {
@@ -20,27 +27,25 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return;
   if (url.searchParams.has('key') || url.searchParams.has('token')) return;
 
-  const fresh =
+  const neverCache =
     url.pathname.endsWith('/version.json') ||
     url.pathname.endsWith('/rev.json') ||
     url.pathname.endsWith('/sw.js') ||
-    url.pathname.endsWith('/check.js') ||
-    url.pathname.endsWith('/index.html') ||
-    url.pathname.endsWith('/liftlog/') ||
-    url.pathname.endsWith('/liftlog') ||
-    url.pathname.endsWith('.js') ||
-    url.pathname.endsWith('.css') ||
-    url.pathname.endsWith('.json');
+    url.pathname.endsWith('/check.js');
 
   event.respondWith(
     fetch(req, { cache: 'no-store' })
       .then((res) => {
-        if (res.ok && !fresh) {
+        if (res.ok && !neverCache) {
           const copy = res.clone();
           caches.open(CACHE).then((cache) => cache.put(req, copy)).catch(() => {});
         }
         return res;
       })
-      .catch(() => caches.match(req).then((hit) => hit || caches.match('./'))),
+      .catch(() =>
+        caches
+          .match(req)
+          .then((hit) => hit || caches.match('./') || caches.match('./index.html')),
+      ),
   );
 });
